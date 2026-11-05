@@ -1,14 +1,3 @@
-# =============================================================================
-# CIC-IDS2017 — Full ML Pipeline
-# Preprocessing → Feature Selection → Training → Evaluation
-# =============================================================================
-# Install once:
-#   pip install pandas numpy scikit-learn imbalanced-learn matplotlib seaborn xgboost
-#
-# Run:
-#   python ids_full_pipeline.py
-# =============================================================================
-
 import os
 import glob
 import warnings
@@ -47,25 +36,18 @@ warnings.filterwarnings("ignore")
 pd.set_option("display.max_columns", None)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# CONFIGURATION  — change path to your folder
-# ─────────────────────────────────────────────────────────────────────────────
-DATA_PATH       = r"D:\Downloads\MachineLearningCVE"   # ← your folder
-OUTPUT_DIR      = r"D:\Downloads\ids_output"            # ← where results go
+DATA_PATH       = r"MachineLearningCVE"   # ← your folder
+OUTPUT_DIR      = r"ids_output"            # ← where results go
 N_FEATURES      = 20          # top-K features to keep after selection
 TEST_SIZE       = 0.15        # 15 % test
 VAL_SIZE        = 0.15        # 15 % validation  (from remaining 85 %)
 RANDOM_STATE    = 42
 MAX_SMOTE       = 5000        # cap minority classes before SMOTE (speed)
 MAX_BENIGN      = 200_000     # undersample BENIGN to this count
-# ─────────────────────────────────────────────────────────────────────────────
+
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-
-# =============================================================================
-# 1. LOAD
-# =============================================================================
 print("\n" + "═"*60)
 print("  STEP 1 — LOAD")
 print("═"*60)
@@ -84,10 +66,6 @@ for f in csv_files:
 df = pd.concat(dfs, ignore_index=True)
 print(f"\nRaw shape : {df.shape}")
 
-
-# =============================================================================
-# 2. PREPROCESSING
-# =============================================================================
 print("\n" + "═"*60)
 print("  STEP 2 — PREPROCESSING")
 print("═"*60)
